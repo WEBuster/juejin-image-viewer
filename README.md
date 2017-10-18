@@ -40,6 +40,7 @@ var imageViewer = new JuejinImageViewer(...)
 new JuejinImageViewer(container || containerList || selector, {
   urlHandler: url => url, // 一般用于去除缩略图参数等
   urlAttribute: 'src',  // 图片 URL 从哪个属性上获取
+  targetClassName: '',  // 用于筛选 img
   eventName: 'click',
   cursor: 'zoom-in',
   backgroundColor: '#fff',

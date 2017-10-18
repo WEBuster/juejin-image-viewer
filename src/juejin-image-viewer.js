@@ -3,6 +3,7 @@ import { on, getViewportSize, applyCSS, loadIamge, forceReflow } from './util'
 const DEFAULT_OPTIONS = {
   urlHandler: url => url,
   urlAttribute: 'src',
+  targetClassName: '',
   eventName: 'click',
   containerClassName: 'juejin-image-viewer__container',
   boxClassName: 'juejin-image-viewer__box',
@@ -32,29 +33,38 @@ export default class JuejinImageViewer {
   }
 
   initCSS () {
+    const {
+      targetClassName,
+      containerClassName,
+      boxClassName,
+      imageClassName,
+      transitionDuration,
+      cursor
+    } = this.options
+    const imgSelector = targetClassName ? `img.${targetClassName}` : 'img'
     this.removeCSS = applyCSS(`
-      .${this.options.containerClassName} img {
-        cursor: ${this.options.cursor};
+      .${containerClassName} ${imgSelector} {
+        cursor: ${cursor};
       }
-      .${this.options.boxClassName} {
+      .${boxClassName} {
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
         z-index: 1;
-        transition: all ${this.options.transitionDuration}ms ease-out;
+        transition: all ${transitionDuration}ms ease-out;
       }
-      .${this.options.boxClassName}.hide {
+      .${boxClassName}.hide {
         opacity: 0;
       }
-      .${this.options.boxClassName},
-      .${this.options.boxClassName} .${this.options.imageClassName} {
+      .${boxClassName},
+      .${boxClassName} .${imageClassName} {
         cursor: zoom-out;
       }
-      .${this.options.imageClassName} {
+      .${imageClassName} {
         position: absolute;
-        transition: all ${this.options.transitionDuration}ms ease-out;
+        transition: all ${transitionDuration}ms ease-out;
       }
     `)
   }
@@ -80,10 +90,12 @@ export default class JuejinImageViewer {
   }
 
   shouldShow (target) {
+    const className = this.options.targetClassName
     return (
       target.nodeName === 'IMG' &&
       target.naturalWidth &&
-      !target.classList.contains(this.options.imageClassName)
+      !target.classList.contains(this.options.imageClassName) &&
+      (!className || target.classList.contains(className))
     )
   }
 
