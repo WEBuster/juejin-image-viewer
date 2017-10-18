@@ -54,5 +54,6 @@ new JuejinImageViewer(container || containerList || selector, {
 ### 方法
 
 ```js
+imageViewer.hide() // 隐藏
 imageViewer.destroy() // 销毁
 ```
