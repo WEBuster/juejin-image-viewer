@@ -10,6 +10,10 @@
   },
   "author": "WEBuster <webuster@xitu.io>",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/WEBuster/juejin-image-viewer/issues"
+  },
+  "homepage": "https://github.com/WEBuster/juejin-image-viewer#readme",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-plugin-external-helpers": "^6.22.0",
