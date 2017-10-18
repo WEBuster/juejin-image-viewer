@@ -1,0 +1,13 @@
+html {
+  font-size: 12px;
+}
+
+body {
+  padding-bottom: 100rem;
+}
+
+.image {
+  display: block;
+  margin-bottom: 1rem;
+  max-width: 20rem;
+}

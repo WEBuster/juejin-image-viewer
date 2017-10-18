@@ -1,0 +1,24 @@
+{
+  "name": "juejin-image-viewer",
+  "version": "1.0.0",
+  "description": "juejin image viewer",
+  "main": "dist/juejin-image-viewer.min.js",
+  "scripts": {
+    "dev": "rollup -w -c rollup.config.dev.js",
+    "build": "rollup -c rollup.config.build.js",
+    "test": "echo 42"
+  },
+  "author": "WEBuster <webuster@xitu.io>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-transform-object-assign": "^6.22.0",
+    "babel-preset-env": "^1.6.0",
+    "rollup": "^0.50.0",
+    "rollup-plugin-babel": "^3.0.2",
+    "rollup-plugin-license": "^0.5.0",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-uglify": "^2.0.1"
+  }
+}
