@@ -42,12 +42,13 @@ new JuejinImageViewer(container || containerList || selector, {
   urlAttribute: 'src',  // 图片 URL 从哪个属性上获取
   targetClassName: '',  // 用于筛选 img
   eventName: 'click',
+  containerClassName: 'juejin-image-viewer__container',
+  boxClassName: 'juejin-image-viewer__box',
+  imageClassName: 'juejin-image-viewer__image',
   cursor: 'zoom-in',
   backgroundColor: '#fff',
   transitionDuration: 200,
-  containerClassName: 'juejin-image-viewer__container',
-  boxClassName: 'juejin-image-viewer__box',
-  imageClassName: 'juejin-image-viewer__image'
+  margin: 0
 })
 ```
 

@@ -10,7 +10,8 @@ const DEFAULT_OPTIONS = {
   imageClassName: 'juejin-image-viewer__image',
   cursor: 'zoom-in',
   backgroundColor: '#fff',
-  transitionDuration: 200
+  transitionDuration: 200,
+  margin: 0
 }
 
 export default class JuejinImageViewer {
@@ -150,8 +151,11 @@ export default class JuejinImageViewer {
 
   computeRenderedRect (originalWidth, originalHeight) {
     const viewportSize = getViewportSize()
-    const widthRatio = originalWidth / viewportSize.width
-    const heightRatio = originalHeight / viewportSize.height
+    const margin = this.options.margin
+    const safeWidth = viewportSize.width - margin * 2
+    const safeHeight = viewportSize.height - margin * 2
+    const widthRatio = originalWidth / safeWidth
+    const heightRatio = originalHeight / safeHeight
     const ratio = Math.max(widthRatio, heightRatio)
     const width = originalWidth / ratio
     const height = originalHeight / ratio
