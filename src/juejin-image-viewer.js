@@ -156,7 +156,7 @@ export default class JuejinImageViewer {
     const safeHeight = viewportSize.height - margin * 2
     const widthRatio = originalWidth / safeWidth
     const heightRatio = originalHeight / safeHeight
-    const ratio = Math.max(widthRatio, heightRatio)
+    const ratio = Math.max(widthRatio, heightRatio, 1)
     const width = originalWidth / ratio
     const height = originalHeight / ratio
     const top = (viewportSize.height - height) / 2

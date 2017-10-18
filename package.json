@@ -1,6 +1,6 @@
 {
   "name": "juejin-image-viewer",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "juejin image viewer",
   "main": "dist/juejin-image-viewer.min.js",
   "scripts": {
