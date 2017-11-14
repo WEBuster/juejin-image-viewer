@@ -142,10 +142,16 @@ export default class JuejinImageViewer {
   }
 
   loadIamge (url, img) {
+    this.box.classList.add('loading')
     loadIamge(url, loadedUrl => {
       img.src = url
       const rect = this.computeRenderedRect(img.naturalWidth, img.naturalHeight)
       this.applyRect(rect, img)
+      this.box.classList.remove('loading')
+      this.box.classList.add('loaded')
+    }, () => {
+      this.box.classList.remove('loading')
+      this.box.classList.add('error')
     })
   }
 
