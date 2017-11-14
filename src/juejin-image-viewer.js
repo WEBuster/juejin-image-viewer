@@ -11,7 +11,8 @@ const DEFAULT_OPTIONS = {
   cursor: 'zoom-in',
   backgroundColor: '#fff',
   transitionDuration: 200,
-  margin: 0
+  margin: 0,
+  parent: null
 }
 
 export default class JuejinImageViewer {
@@ -110,8 +111,11 @@ export default class JuejinImageViewer {
     const renderedRect = this.computeRenderedRect(width, height)
     const box = document.createElement('div')
     const img = document.createElement('img')
+    const parent = this.options.parent || document.body
 
     img.src = src
+    img.width = width
+    img.height = height
     img.className = this.options.imageClassName
     img.style.transform = this.computeTransform(targetRect, renderedRect)
     this.applyRect(renderedRect, img)
@@ -119,7 +123,7 @@ export default class JuejinImageViewer {
     this.box = box
     box.className = this.options.boxClassName
     box.appendChild(img)
-    document.body.appendChild(box)
+    parent.appendChild(box)
     forceReflow()
 
     img.style.transform = ''
@@ -145,6 +149,8 @@ export default class JuejinImageViewer {
     this.box.classList.add('loading')
     loadIamge(url, loadedUrl => {
       img.src = url
+      img.width = img.naturalWidth
+      img.height = img.naturalHeight
       const rect = this.computeRenderedRect(img.naturalWidth, img.naturalHeight)
       this.applyRect(rect, img)
       this.box.classList.remove('loading')

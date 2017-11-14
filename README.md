@@ -48,7 +48,8 @@ new JuejinImageViewer(container || containerList || selector, {
   cursor: 'zoom-in',
   backgroundColor: '#fff',
   transitionDuration: 200,
-  margin: 0
+  margin: 0,
+  parent: null
 })
 ```
 
