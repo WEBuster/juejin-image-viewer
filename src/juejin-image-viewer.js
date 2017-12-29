@@ -1,9 +1,8 @@
 import { on, getViewportSize, applyCSS, loadIamge, forceReflow } from './util'
 
 const DEFAULT_OPTIONS = {
-  urlHandler: url => url,
-  urlAttribute: 'src',
-  targetClassName: '',
+  targetFilter: elem => elem.nodeName === 'IMG' && elem.naturalWidth,
+  urlGetter: elem => elem.getAttribute('src'),
   eventName: 'click',
   containerClassName: 'juejin-image-viewer__container',
   boxClassName: 'juejin-image-viewer__box',
@@ -36,18 +35,12 @@ export default class JuejinImageViewer {
 
   initCSS () {
     const {
-      targetClassName,
       containerClassName,
       boxClassName,
       imageClassName,
-      transitionDuration,
-      cursor
+      transitionDuration
     } = this.options
-    const imgSelector = targetClassName ? `img.${targetClassName}` : 'img'
     this.removeCSS = applyCSS(`
-      .${containerClassName} ${imgSelector} {
-        cursor: ${cursor};
-      }
       .${boxClassName} {
         position: fixed;
         top: 0;
@@ -92,19 +85,13 @@ export default class JuejinImageViewer {
   }
 
   shouldShow (target) {
-    const className = this.options.targetClassName
-    return (
-      target.nodeName === 'IMG' &&
-      target.naturalWidth &&
-      !target.classList.contains(this.options.imageClassName) &&
-      (!className || target.classList.contains(className))
-    )
+    return this.options.targetFilter(target) &&
+      !target.classList.contains(this.options.imageClassName)
   }
 
   show (target) {
     const src = target.getAttribute('src')
-    const url = target.getAttribute(this.options.urlAttribute)
-    const handledUrl = this.options.urlHandler(url)
+    const url = this.options.urlGetter(target)
     const width = target.naturalWidth
     const height = target.naturalHeight
     const targetRect = target.getBoundingClientRect()
@@ -133,8 +120,8 @@ export default class JuejinImageViewer {
     on(window, 'resize', this.hide.bind(this))
     on(window, 'scroll', this.hide.bind(this))
 
-    if (handledUrl !== src) {
-      this.loadIamge(handledUrl, img)
+    if (url !== src) {
+      this.loadIamge(url, img)
     }
   }
 

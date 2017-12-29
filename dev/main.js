@@ -1,6 +1,6 @@
 var imageViewer = new JuejinImageViewer(document.body, {
-  urlHandler: url => url.split('?')[0],
-  targetClassName: 'target',
+  urlGetter: elem => elem.getAttribute('src').split('?')[0],
+  targetFilter: elem => elem.classList.contains('target'),
   margin: 50
 })
 

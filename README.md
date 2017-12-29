@@ -38,9 +38,9 @@ var imageViewer = new JuejinImageViewer(...)
 
 ```js
 new JuejinImageViewer(container || containerList || selector, {
-  urlHandler: url => url, // 一般用于去除缩略图参数等
-  urlAttribute: 'src',  // 图片 URL 从哪个属性上获取
-  targetClassName: '',  // 用于筛选 img
+  targetFilter: elem => elem.nodeName === 'IMG' && elem.naturalWidth,
+  urlGetter: elem => elem.getAttribute('src'),
+  urlHandler: url => url,
   eventName: 'click',
   containerClassName: 'juejin-image-viewer__container',
   boxClassName: 'juejin-image-viewer__box',
@@ -56,6 +56,6 @@ new JuejinImageViewer(container || containerList || selector, {
 ### 方法
 
 ```js
-imageViewer.hide() // 隐藏
-imageViewer.destroy() // 销毁
+imageViewer.hide()
+imageViewer.destroy()
 ```
